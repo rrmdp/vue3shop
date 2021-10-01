@@ -25,7 +25,7 @@
         </nav>
         <a @click="cartToggle" class="top-bar-cart-link">
           <i class="icofont-cart-alt icofont-1x"></i>
-          <span>Cart (0)</span>
+          <span>Cart ({{totalQuantity()}})</span>
         </a>
       </header>
 
@@ -126,6 +126,11 @@
           },
           removeItem(name) {
             delete this.cart[name]
+          },
+          totalQuantity() {
+            return Object.values(this.cart).reduce((acc, curr) => {
+              return acc + curr
+            }, 0)
           }
         },
         async mounted() {
